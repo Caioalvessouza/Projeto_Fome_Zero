@@ -1,4 +1,4 @@
-# Projeto_Cury_Company
+# Projeto_fome_Zero
 
 A Cury Company é uma empresa de tecnologia que criou um aplicativo
 que conecta restaurantes, entregadores e pessoas.
