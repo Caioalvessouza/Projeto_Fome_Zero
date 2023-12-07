@@ -26,18 +26,18 @@ métricas de crescimento:
 2. Quantidade de pedidos por semana.
 3. Distribuição dos pedidos por tipo de tráfego.
 4. Comparação do volume de pedidos por cidade e tipo de tráfego.
-4. A quantidade de pedidos por entregador por semana.
-5. A localização central de cada cidade por tipo de tráfego.
+5. A quantidade de pedidos por entregador por semana.
+6. A localização central de cada cidade por tipo de tráfego.
 
 ## Do lado do entregador:
-7. 1. A menor e maior idade dos entregadores.
+1. A menor e maior idade dos entregadores.
 2. A pior e a melhor condição de veículos.
 3. A avaliação médida por entregador.
 4. A avaliação média e o desvio padrão por tipo de tráfego.
 5. A avaliação média e o desvio padrão por condições climáticas.
 6. Os 10 entregadores mais rápidos por cidade.
 7. Os 10 entregadores mais lentos por cidade.
-8. 
+
 ## Do lado do restaurantes:
 1. A quantidade de entregadores únicos.
 2. A distância média dos resturantes e dos locais de entrega.
@@ -57,7 +57,6 @@ exibam essas métricas da melhor forma possível para o CEO.
 visão restaurante e visão entregadores.
 
 ## Estratégia da solução
-4. 
 O painel estratégico foi desenvolvido utilizando as métricas que refletem
 as 3 principais visões do modelo de negócio da empresa:
 1. Visão do crescimento da empresa
