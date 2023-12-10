@@ -111,9 +111,10 @@ def create_sidebar(df, image_path='logoprojetofomezero.png'):
 
     # Exibição de métrica na quarta coluna
     columns[3].metric(
-        "Avaliações/Plataforma",
-        value=f"{df['Votes'].sum():,}".replace(',', '.'),
+    "Avaliações/Plataforma",
+    value=f"{df['Votes'].sum():,}".replace(',', '.'),
     )
+
 
     # Exibir a métrica na quinta coluna
     columns[4].metric(
