@@ -94,19 +94,19 @@ def create_sidebar(df, image_path='logoprojetofomezero.png'):
     # Exibição de métrica na primeira coluna
     columns[0].metric(
         "Restaurantes Cadastrados",
-        value=df['Restaurant ID'].nunique(),
+        value=6942,
     )
 
     # Exibição de métrica na segunda coluna
     columns[1].metric(
         "Países Cadastrados",
-        value=df.loc[:, 'country'].nunique(),
+        value=15,
     )
 
     # Exibição de métrica na terceira coluna
     columns[2].metric(
         "Cidades Cadastrados",
-        value=df.loc[:, 'City'].nunique(),
+        value=125,
     )
 
     # Exibição de métrica na quarta coluna
@@ -121,7 +121,7 @@ def create_sidebar(df, image_path='logoprojetofomezero.png'):
     # Exibir a métrica na quinta coluna
     columns[4].metric(
         "Tipos de Culinárias cadastradas",
-        value=num_unique_cuisines,
+        value=165,
     )
     create_map(df, countries, num_unique_cuisines)
 
