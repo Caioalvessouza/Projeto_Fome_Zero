@@ -66,7 +66,7 @@ def create_sidebar(df, image_path='logoprojetofomezero.png'):
     countries = st.sidebar.multiselect(
         "Escolha os Paises que Deseja visualizar os Restaurantes",
         df['country'].unique().tolist(),
-        default=["Brasil", "Inglaterra", "Catar", "África do Sul", "Canadá", "Austrália"],
+        default=df['country'].unique().tolist(),
     )
 
     # Criar uma cópia do DataFrame
@@ -86,7 +86,40 @@ def create_sidebar(df, image_path='logoprojetofomezero.png'):
 
     # Criar a métrica para o número de tipos de culinárias cadastradas
     num_unique_cuisines = df['Cuisines'].nunique()
+st.markdown("### Temos as seguintes métricas dentro da nossa plataforma:")
 
+    # Criação de cinco colunas
+    columns = st.columns(5)
+
+    # Exibição de métrica na primeira coluna
+    columns[0].metric(
+        "Restaurantes Cadastrados",
+        value=df['Restaurant ID'].nunique(),
+    )
+
+    # Exibição de métrica na segunda coluna
+    columns[1].metric(
+        "Países Cadastrados",
+        value=df.loc[:, 'country'].nunique(),
+    )
+
+    # Exibição de métrica na terceira coluna
+    columns[2].metric(
+        "Cidades Cadastrados",
+        value=df.loc[:, 'City'].nunique(),
+    )
+
+    # Exibição de métrica na quarta coluna
+    columns[3].metric(
+        "Avaliações/Plataforma",
+        value=f"{df['Votes'].sum():,}".replace(',', '.'),
+    )
+
+    # Exibir a métrica na quinta coluna
+    columns[4].metric(
+        "Tipos de Culinárias cadastradas",
+        value=num_unique_cuisines,
+    )
     create_map(df, countries, num_unique_cuisines)
 
 
