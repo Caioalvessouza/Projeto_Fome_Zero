@@ -14,7 +14,7 @@ from haversine import haversine
 # Importe o módulo de expressões regulares
 import re
 
-import seaborn as sns
+#import seaborn as sns
 
 # Carregar os dados do CSV
 csv_path = 'data.csv'
