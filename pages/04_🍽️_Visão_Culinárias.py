@@ -14,8 +14,6 @@ from PIL import Image
 from haversine import haversine
 # Importe o módulo de expressões regulares
 import re
-import inflection
-import seaborn as sns
 
 #---------------------------------------------------------------------------------------
 # Carregar os dados do CSV
