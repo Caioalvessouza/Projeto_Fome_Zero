@@ -154,7 +154,7 @@ def create_map(dataframe):
   
 ##-------------------------------------------------------------------------------------------------------------
 def main():
-    df = pd.read_csv(r'C:\Users\Caio\Documents\cientista de dados\phyton\Projeto do aluno\zomato\data.csv')
+    df = pd.read_csv(csv_path)
     COUNTRIES = {
         1: "Índia",
         14: "Austrália",
