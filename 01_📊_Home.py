@@ -11,8 +11,6 @@ from collections import Counter
 
 # Carregar os dados do CSV
 csv_path = 'data.csv'
-
-# Leia o arquivo CSV e crie o DataFrame
 df = pd.read_csv(csv_path)
 
 # Mapeamento de códigos de países para nomes de países
@@ -99,7 +97,7 @@ def create_sidebar(df, image_path='logoprojetofomezero.png'):
 # Função principal
 def main():
     # Obter os países selecionados na barra lateral e o número único de culinárias
-    countries, num_unique_cuisines = create_sidebar(df, r"C:\Users\Caio\Documents\cientista de dados\phyton\Projeto do aluno\zomato\logoprojetofomezero.png")
+    countries, num_unique_cuisines = create_sidebar(df)
 
     st.title("Fome Zero - O Melhor Lugar para Encontrar seu Novo Restaurante Favorito!")
 
@@ -141,7 +139,7 @@ def main():
 
     st.sidebar.download_button(
         "Baixar Dados Tratados",
-        r"C:\Users\Caio\Documents\cientista de dados\phyton\Projeto do aluno\zomato\data.csv",
+        "data.csv",
         key="download_button"
     )
 
@@ -188,5 +186,6 @@ def create_map(dataframe, selected_countries):
 
 if __name__ == "__main__":
     main()
+
 
 
