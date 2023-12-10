@@ -112,7 +112,7 @@ def create_sidebar(df, image_path='logoprojetofomezero.png'):
     # Exibição de métrica na quarta coluna
     columns[3].metric(
     "Avaliações/Plataforma",
-    value=4639654,
+    value=4.639.654,
     )
 
 
