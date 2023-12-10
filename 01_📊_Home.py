@@ -11,7 +11,7 @@ import plotly.express as px
 #from utils.process_data import process_data
 from collections import Counter
 
-csv_path = data.csv
+csv_path = 'data.csv'
 
 
 # Leia o arquivo CSV e crie o DataFrame
