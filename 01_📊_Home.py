@@ -150,7 +150,7 @@ def create_map(dataframe):
             icon=folium.Icon(color=color, icon="home", prefix="fa"),
         ).add_to(marker_cluster)
 
-    folium_static(m, width=1300, height=900)
+    folium_static(m, width=1000, height=900)
   
 ##-------------------------------------------------------------------------------------------------------------
 def main():
