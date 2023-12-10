@@ -86,7 +86,7 @@ def create_sidebar(df, image_path='logoprojetofomezero.png'):
 
     # Criar a métrica para o número de tipos de culinárias cadastradas
     num_unique_cuisines = df['Cuisines'].nunique()
-st.markdown("### Temos as seguintes métricas dentro da nossa plataforma:")
+    st.markdown("### Temos as seguintes métricas dentro da nossa plataforma:")
 
     # Criação de cinco colunas
     columns = st.columns(5)
