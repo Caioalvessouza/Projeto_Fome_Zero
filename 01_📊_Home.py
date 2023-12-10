@@ -110,9 +110,11 @@ num_unique_cuisines = df['Cuisines'].nunique()
 
 def main():
     st.title("Fome Zero - O Melhor lugar para encontrar seu mais novo restaurante favorito!")
-    create_sidebar(df, r"C:\Users\Caio\Documents\cientista de dados\phyton\Projeto do aluno\zomato\logoprojetofomezero.png")
+    create_sidebar(df, 'logoprojetofomezero.png')
+
 if __name__ == "__main__":
-  main()
+    main()
+
 
 ##-----------------------------------------------------------------------------------------------------------
 def create_map(dataframe):
