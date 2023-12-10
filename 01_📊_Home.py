@@ -117,14 +117,17 @@ if __name__ == "__main__":
 
 
 ##-----------------------------------------------------------------------------------------------------------
-def create_map(dataframe):
-    f = folium.Figure(width=1300, height=900)
-    m = folium.Map(max_bounds=True).add_to(f)  ###### arrumar quando terminar colocar o a no mapa
+def create_map(dataframe, selected_countries):
+    f = folium.Figure(width=960, height=900)
+    m = folium.Map(max_bounds=True).add_to(f)
     marker_cluster = MarkerCluster().add_to(m)
 
     colors = ["darkgreen", "green", "lightgreen", "orange", "red", "darkred"]
   
-    for idx, line in dataframe.iterrows():
+    # Filtrar o DataFrame com base nos países selecionados
+    filtered_df = dataframe[dataframe['country'].isin(selected_countries)]
+
+    for idx, line in filtered_df.iterrows():
         name = line["Restaurant Name"]
         price_for_two = line["Average Cost for two"]
         cuisine = line["Cuisines"]
