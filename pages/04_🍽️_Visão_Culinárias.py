@@ -18,10 +18,8 @@ import inflection
 import seaborn as sns
 
 #---------------------------------------------------------------------------------------
-
-
-
-csv_path = r'C:\Users\Caio\Documents\cientista de dados\phyton\Projeto do aluno\zomato\data.csv'
+# Carregar os dados do CSV
+csv_path = 'data.csv'
 df = pd.read_csv(csv_path)
 
 #---------------------------------------------------------------------------------------
