@@ -9,11 +9,13 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 from collections import Counter
 
+# Carregar os dados do CSV
 csv_path = 'data.csv'
 
 # Leia o arquivo CSV e crie o DataFrame
 df = pd.read_csv(csv_path)
 
+# Mapeamento de códigos de países para nomes de países
 COUNTRIES = {
     1: "Índia",
     14: "Austrália",
@@ -32,9 +34,10 @@ COUNTRIES = {
     216: "Estados Unidos da América",
 }
 
-# Adicione a coluna 'country' ao DataFrame usando o mapeamento
+# Adicionar a coluna 'country' ao DataFrame usando o mapeamento
 df['country'] = df['Country Code'].map(COUNTRIES)
 
+# Mapeamento de códigos de cores para nomes de cores
 COLORS = {
     "3F7E00": "darkgreen",
     "5BA829": "green",
@@ -46,12 +49,15 @@ COLORS = {
 }
 df["color_name"] = df["Rating color"].map(COLORS)
 
-
+# Obter dados numéricos do DataFrame
 def get_numerical_attributes(df):
     numerical_data = df.select_dtypes(include=['number'])
     return numerical_data
 
+# Configurar a página do Streamlit
+st.set_page_config(page_title="Home", page_icon="📊", layout="wide")
 
+# Criar a barra lateral
 def create_sidebar(df, image_path='logoprojetofomezero.png'):
     imagem = Image.open(image_path)
     st.sidebar.image(imagem, width=120)
@@ -61,12 +67,12 @@ def create_sidebar(df, image_path='logoprojetofomezero.png'):
     col2.markdown("# Fome Zero")
 
     st.sidebar.markdown("## Filtros")
-    print(df.columns)
 
+    # Obter os países selecionados na barra lateral
     countries = st.sidebar.multiselect(
-        "Escolha os Paises que Deseja visualizar os Restaurantes",
-        df['country'].unique().tolist(),
-        default=df['country'].unique().tolist(),
+        "Escolha os Países que Deseja Visualizar os Restaurantes",
+        df.loc[:, "country"].unique().tolist(),
+        default=["Brasil", "Inglaterra", "Catar", "África do Sul", "Canadá", "Austrália"],
     )
 
     # Criar uma cópia do DataFrame
@@ -86,7 +92,18 @@ def create_sidebar(df, image_path='logoprojetofomezero.png'):
 
     # Criar a métrica para o número de tipos de culinárias cadastradas
     num_unique_cuisines = df['Cuisines'].nunique()
-    st.markdown("### Temos as seguintes métricas dentro da nossa plataforma:")
+
+    # Retornar os países selecionados e o número único de culinárias
+    return countries, num_unique_cuisines
+
+# Função principal
+def main():
+    # Obter os países selecionados na barra lateral e o número único de culinárias
+    countries, num_unique_cuisines = create_sidebar(df, r"C:\Users\Caio\Documents\cientista de dados\phyton\Projeto do aluno\zomato\logoprojetofomezero.png")
+
+    st.title("Fome Zero - O Melhor Lugar para Encontrar seu Novo Restaurante Favorito!")
+
+    st.markdown("### Temos as Seguintes Marcas Dentro da Nossa Plataforma:")
 
     # Criação de cinco colunas
     columns = st.columns(5)
@@ -94,40 +111,45 @@ def create_sidebar(df, image_path='logoprojetofomezero.png'):
     # Exibição de métrica na primeira coluna
     columns[0].metric(
         "Restaurantes Cadastrados",
-        value=6942,
+        value=df['Restaurant ID'].nunique(),
     )
 
     # Exibição de métrica na segunda coluna
     columns[1].metric(
         "Países Cadastrados",
-        value=15,
+        value=df.loc[:, 'country'].nunique(),
     )
 
     # Exibição de métrica na terceira coluna
     columns[2].metric(
-        "Cidades Cadastrados",
-        value=125,
+        "Cidades Cadastradas",
+        value=df.loc[:, 'City'].nunique(),
     )
 
-    # Exibição de métrica na quarta coluna
     columns[3].metric(
-    "Avaliações/Plataforma",
-    value="{:,}".format(4639654).replace(',', '.'),
-   )
-
-
-
-
-    # Exibir a métrica na quinta coluna
-    columns[4].metric(
-        "Tipos de Culinárias cadastradas",
-        value=165,
+        "Avaliações/Plataforma",
+        value=f"{df['Votes'].sum():,}".replace(',', '.'),
     )
-    create_map(df, countries, num_unique_cuisines)
 
+    # Exibir a métrica no Streamlit
+    columns[4].metric(
+        "Tipos de Culinárias Cadastradas",
+        value=num_unique_cuisines,
+    )
 
-def create_map(dataframe, selected_countries, num_unique_cuisines):
-    f = folium.Figure(width=960, height=900)
+    st.sidebar.markdown("### Dados Tratados")
+
+    st.sidebar.download_button(
+        "Baixar Dados Tratados",
+        r"C:\Users\Caio\Documents\cientista de dados\phyton\Projeto do aluno\zomato\data.csv",
+        key="download_button"
+    )
+
+    create_map(df, countries)
+
+# Criar o mapa com os marcadores
+def create_map(dataframe, selected_countries):
+    f = folium.Figure(width=1300, height=900)
     m = folium.Map(max_bounds=True).add_to(f)
     marker_cluster = MarkerCluster().add_to(m)
 
@@ -147,9 +169,9 @@ def create_map(dataframe, selected_countries, num_unique_cuisines):
         color = colors[idx % len(colors)]
 
         html = "<p><strong>{}</strong></p>".format(name)
-        html += "<p>Price: {} ({}) para dois</p>".format(price_for_two, currency)
-        html += "<p>Type: {}</p>".format(cuisine)
-        html += "<p>Aggregate rating: {}/5.0</p>".format(rating)
+        html += "<p>Preço: {} ({}) para dois</p>".format(price_for_two, currency)
+        html += "<p>Tipo: {}</p>".format(cuisine)
+        html += "<p>Avaliação Agregada: {}/5.0</p>".format(rating)
 
         popup = folium.Popup(
             folium.Html(html, script=True),
@@ -162,13 +184,7 @@ def create_map(dataframe, selected_countries, num_unique_cuisines):
             icon=folium.Icon(color=color, icon="home", prefix="fa"),
         ).add_to(marker_cluster)
 
-    folium_static(m, width=960, height=900)
-
-
-def main():
-    st.title("Fome Zero - O Melhor lugar para encontrar seu mais novo restaurante favorito!")
-    create_sidebar(df, 'logoprojetofomezero.png')
-
+    folium_static(m, width=1300, height=900)
 
 if __name__ == "__main__":
     main()
