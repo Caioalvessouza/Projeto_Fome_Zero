@@ -11,8 +11,7 @@ import plotly.express as px
 #from utils.process_data import process_data
 from collections import Counter
 
-csv_path = r'C:\Users\Caio\Documents\cientista de dados\phyton\Projeto do aluno\zomato\data.csv'
-df = pd.read_csv(csv_path)
+csv_path = r'C:/Users/Caio/Documents/cientista de dados/phyton/Projeto do aluno/zomato/data.csv'
 
 
 
