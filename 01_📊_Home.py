@@ -13,6 +13,8 @@ from collections import Counter
 
 csv_path = r'C:/Users/Caio/Documents/cientista de dados/phyton/Projeto do aluno/zomato/data.csv'
 
+# Leia o arquivo CSV e crie o DataFrame
+df = pd.read_csv(caminho_csv)
 
 
 
